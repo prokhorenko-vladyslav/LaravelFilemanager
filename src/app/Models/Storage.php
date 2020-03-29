@@ -4,35 +4,19 @@ namespace Laurel\FileManager\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laurel\FileManager\App\LaurelFM;
 
 class Storage extends Model
 {
     use SoftDeletes;
 
-    private static $currentStorage = null;
     protected $fillable = ['name', 'icon', 'is_remote', 'remote_address', 'class'];
     protected $dates = ['deleted_at'];
     protected $casts = ['is_remote' => 'bool'];
 
-    public static function setCurrentStorage(int $id)
+    public static function findById($id)
     {
-        self::$currentStorage = $id;
-        session()->put('storage_id', $id);
-    }
-
-    public static function getCurrentStorage()
-    {
-        return self::$currentStorage;
-    }
-
-    public static function storageExists($id = null)
-    {
-        return self::where('id', $id ?? self::getCurrentStorage())->exists();
-    }
-
-    public static function findById($id = null)
-    {
-        return self::where('id', $id ?? self::getCurrentStorage())->firstOrFail();
+        return self::findOrFail($id);
     }
 
     public function getIcon() : string

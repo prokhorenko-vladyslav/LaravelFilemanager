@@ -3,6 +3,7 @@
 namespace Laurel\FileManager\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Laurel\FileManager\App\LaurelFM;
 use Laurel\FileManager\App\Models\Storage;
 use Illuminate\Http\Request;
 
@@ -25,10 +26,10 @@ class StorageController extends Controller
 
     public function show(Request $request, int $id)
     {
+        dd(LaurelFM::instance());
         try {
             $storage = Storage::findOrFail($id);
             $storageRepository = new $storage->class;
-            dd($storageRepository);
         } catch (\Exception $e) {
             return abort(404);
         }

@@ -2,6 +2,7 @@
 
 namespace Laurel\FileManager\App\Http\Middleware;
 
+use Laurel\FileManager\App\LaurelFM;
 use Laurel\FileManager\App\Models\Storage;
 use Closure;
 
@@ -16,12 +17,8 @@ class StorageMiddleware
      */
     public function handle($request, Closure $next)
     {
-        Storage::setCurrentStorage(1);
-        if (!Storage::storageExists()) {
-            return abort(404);
-        }
-        $storage = app(Storage::findById()->class);
-        dd($storage);
+        LaurelFM::instance()->setCurrentStorage(12);
+        dd(LaurelFM::instance()->getCurrentStorage());
         return $next($request);
     }
 }

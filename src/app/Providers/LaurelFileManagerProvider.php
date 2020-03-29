@@ -27,7 +27,6 @@ class LaurelFileManagerProvider extends ServiceProvider
         $this->addPublished();
         $this->loadMigrationsFrom($this->getPackagePath() . '/database/migrations');
         $this->loadFactoriesFrom($this->getPackagePath() . '/database/factories');
-//        $this->loadRoutesFrom($this->getPackagePath() . '/routes/api.php');
     }
 
     private function getPackagePath()
