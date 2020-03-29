@@ -1,7 +1,7 @@
 {
     "name": "laurel/file-manager",
     "description": "Simple file manager for laravel",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
