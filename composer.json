@@ -1,0 +1,21 @@
+{
+    "name": "laurel/file-manager",
+    "description": "Simple file manager for laravel",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Prokhorenko Vladyslav",
+            "email": "random.person.1907@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "laurel/hooks": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Laurel\\FileManager\\": "src"
+        }
+    }
+}
