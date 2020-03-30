@@ -22,11 +22,13 @@ class StorageSeeder extends Seeder
         (new Storage([
             'name' => 'Local',
             'class' => LocalStorage::class,
+            'disk_name' => 'local_storage',
         ]))->save();
 
         (new Storage([
             'name' => 'GoogleDrive',
             'class' => GoogleDriveStorage::class,
+            'disk_name' => 'local_storage_2',
         ]))->save();
     }
 }

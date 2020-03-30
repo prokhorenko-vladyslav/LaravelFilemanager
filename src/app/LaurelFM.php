@@ -3,7 +3,9 @@
 
 namespace Laurel\FileManager\App;
 
+use Illuminate\Contracts\Filesystem\Filesystem;
 use Laurel\FileManager\App\Models\Storage;
+use \Illuminate\Support\Facades\Storage as StorageFacade;
 use Laurel\Hooks\Traits\Hookable;
 
 class LaurelFM
@@ -12,6 +14,7 @@ class LaurelFM
 
     private static $instance;
     private $storage;
+    private $diskInstance;
 
     private function __construct()
     {
@@ -35,11 +38,23 @@ class LaurelFM
     {
         $this->storage = Storage::findById($id);
         session()->put('storage_id', $id);
+        if (!$this->getCurrentStorage()->isRemote() && !StorageFacade::exists($this->getCurrentStorage()->getDiskName())) {
+            StorageFacade::makeDirectory($this->getCurrentStorage()->getDiskName());
+        }
+
         return $this;
     }
 
-    public function getCurrentStorage()
+    public function getCurrentStorage() : Storage
     {
         return $this->storage;
+    }
+
+    public function getDiskInstance() : Filesystem
+    {
+        if (!$this->diskInstance)
+            $this->diskInstance = StorageFacade::disk($this->getCurrentStorage()->getDiskName());
+
+        return $this->diskInstance;
     }
 }

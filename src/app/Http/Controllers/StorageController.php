@@ -26,7 +26,7 @@ class StorageController extends Controller
 
     public function show(Request $request, int $id)
     {
-        dd(LaurelFM::instance());
+        dd(LaurelFM::instance()->getDiskInstance()->allFiles());
         try {
             $storage = Storage::findOrFail($id);
             $storageRepository = new $storage->class;

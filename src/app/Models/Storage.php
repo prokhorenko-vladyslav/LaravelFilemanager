@@ -10,11 +10,11 @@ class Storage extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['name', 'icon', 'is_remote', 'remote_address', 'class'];
+    protected $fillable = ['name', 'icon', 'is_remote', 'remote_address', 'class', 'disk_name'];
     protected $dates = ['deleted_at'];
     protected $casts = ['is_remote' => 'bool'];
 
-    public static function findById($id)
+    public static function findById($id) : self
     {
         return self::findOrFail($id);
     }
@@ -37,6 +37,11 @@ class Storage extends Model
     public function getRemoteHostAddress() : string
     {
         return (bool)$this->remote_address;
+    }
+
+    public function getDiskName()
+    {
+        return $this->disk_name;
     }
 
     public function isDeleted() : bool

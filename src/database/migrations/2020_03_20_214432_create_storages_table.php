@@ -20,6 +20,7 @@ class CreateStoragesTable extends Migration
             $table->boolean('is_remote')->default(false);
             $table->string('remote_address')->nullable();
             $table->string('class');
+            $table->string('disk_name');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -17,8 +17,7 @@ class StorageMiddleware
      */
     public function handle($request, Closure $next)
     {
-        LaurelFM::instance()->setCurrentStorage(12);
-        dd(LaurelFM::instance()->getCurrentStorage());
+        LaurelFM::instance()->setCurrentStorage(1);
         return $next($request);
     }
 }
