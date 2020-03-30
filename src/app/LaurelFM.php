@@ -57,4 +57,9 @@ class LaurelFM
 
         return $this->diskInstance;
     }
+
+    public function getDiskConfig()
+    {
+        return config('filesystems.disks.' . $this->getCurrentStorage()->getDiskName());
+    }
 }
