@@ -4,6 +4,7 @@ namespace Laurel\FileManager\App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Laurel\FileManager\App\LaurelFM;
+use Laurel\FileManager\App\Models\Directory;
 use Laurel\FileManager\App\Models\Storage;
 use Illuminate\Http\Request;
 
@@ -24,14 +25,11 @@ class StorageController extends Controller
 
     }
 
-    public function show(Request $request, int $id)
+    public function show(Request $request, int $id, string $route = "./")
     {
-        dd(LaurelFM::instance()->getDiskInstance()->allFiles());
-        try {
-            $storage = Storage::findOrFail($id);
-            $storageRepository = new $storage->class;
-        } catch (\Exception $e) {
-            return abort(404);
-        }
+        //TODO add indexing method
+        return response()->json([
+           "directories" => LaurelFM::instance()->getCurrentStorage()->directories()->paginate(10),
+        ]);
     }
 }

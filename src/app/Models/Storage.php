@@ -48,4 +48,9 @@ class Storage extends Model
     {
         return $this->{$this->getDeletedAtColumn()} !== null;
     }
+
+    public function directories()
+    {
+        return $this->hasMany(Directory::class);
+    }
 }
